@@ -2,7 +2,7 @@ chat_app
 ========
 
 Console messenger program 
-
+------
 The user is asked if they want to host the connection or join a current hosted connection. They have to type either "h" for hosting or "j" for joining another hosted connection. 
 
 If the user is hosting, the port is hardcoded to port 1234. I haven't got around to changing that yet for the user to set a specific port number. And if the user is joining a connection they need to enter the ip address and port number of the current host. 
