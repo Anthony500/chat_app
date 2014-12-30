@@ -2,9 +2,7 @@ chat_app
 ========
 
 Messenger program that uses named pipes, winsocks (TCP), and threads. 
----------------------------------------------
-I created this just to understand winsocks and IPC on windows. 
-
+-------------
 
 The user is asked if they want to host the connection or join a current hosted connection. They have to type either "h" for hosting or "j" for joining another hosted connection. 
 
@@ -15,5 +13,4 @@ In order to quit the program the user must type the word "quit" in the chat wind
 And if the chat window is closed before the chatlog window or the user didn't quit properly, the chatlog window loops a readfile error because the named pipe is closed but it's still reading for input. 
 
 ==========================================================
-
-I'm still working on the main files, nothing is complete. I do not take any responsibility for using this software. 
+I created this just to understand winsocks and IPC on windows. And I am still working on the main files, nothing is complete. I do not take any responsibility for using this software. 
