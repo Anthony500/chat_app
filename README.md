@@ -11,4 +11,4 @@ In order to quit the program the user must type the word "quit" in the chat wind
 
 And if the chat window is closed before the chatlog window or the user didn't quit properly, the chatlog window loops a readfile error because the named pipe is closed but it's still reading for input. 
 
-I created this just to understand winsocks and IPC on windows. This program does not encrypt any messages that might be a figure I add over time. And I am still working on the main file and UI, nothing is complete. 
+I created this just to understand winsocks and IPC on windows. This program does not encrypt any messages that might be a feature I add over time. And I am still working on the main file and UI, nothing is complete. 
