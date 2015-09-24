@@ -1,5 +1,3 @@
-// 
-
 // all main include headers
 #include "stdafx.h"
 
@@ -21,16 +19,16 @@ using std::string;
 // Get the horizontal and vertical screen sizes in pixel
 void GetDesktopResolution(int& horizontal, int& vertical)
 {
-   RECT desktop;
-   // Get a handle to the desktop window
-   const HWND hDesktop = GetDesktopWindow();
-   // Get the size of screen to the variable desktop
-   GetWindowRect(hDesktop, &desktop);
-   // The top left corner will have coordinates (0,0)
-   // and the bottom right corner will have coordinates
-   // (horizontal, vertical)
-   horizontal = desktop.right;
-   vertical = desktop.bottom;
+	RECT desktop;
+	// Get a handle to the desktop window
+	const HWND hDesktop = GetDesktopWindow();
+	// Get the size of screen to the variable desktop
+	GetWindowRect(hDesktop, &desktop);
+	// The top left corner will have coordinates (0,0)
+	// and the bottom right corner will have coordinates
+	// (horizontal, vertical)
+	horizontal = desktop.right;
+	vertical = desktop.bottom;
 }
 
 
@@ -60,7 +58,7 @@ void change_color(string color = "")
 		SetConsoleTextAttribute ( h, FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);
 	else // yellow
 		SetConsoleTextAttribute ( h, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN );
-	 // END OF COLOR CHANGER
+	// END OF COLOR CHANGER
 }
 
 // WORKS!!!!!
@@ -71,12 +69,12 @@ void change_color(string color = "")
 // the arguements are 1234 and username in argv[0] and argv[1]
 void startup(LPCTSTR lpApplicationName, string username, bool if_host, string ip_port[] = NULL)
 {
-    STARTUPINFO si;
-    PROCESS_INFORMATION pi;
+	STARTUPINFO si;
+	PROCESS_INFORMATION pi;
 
-    ZeroMemory( &si, sizeof(si));
-    //si.cb = sizeof(si);
-    ZeroMemory( &pi, sizeof(pi));
+	ZeroMemory( &si, sizeof(si));
+	//si.cb = sizeof(si);
+	ZeroMemory( &pi, sizeof(pi));
 
 	string holder = "1234 ";
 	holder += username;
@@ -94,13 +92,13 @@ void startup(LPCTSTR lpApplicationName, string username, bool if_host, string ip
 
 
 	if(!CreateProcess(lpApplicationName, LPWSTR(x.c_str()), NULL, NULL,
-                  NULL, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi))
-    {
+		NULL, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi))
+	{
 		std::cerr << "Uh-Oh! CreateProcess() failed to start program \"" << GetLastError() << "\"\n";
-	//	exit(1);
+		//	exit(1);
 	}
-    CloseHandle(pi.hProcess);
-    CloseHandle(pi.hThread);
+	CloseHandle(pi.hProcess);
+	CloseHandle(pi.hThread);
 }
 
 // WORKS no probs
@@ -136,7 +134,7 @@ void show_chat2(SocketBase * s)
 {
 	string username = s->receive();
 	cout <<  username << " joined chat!!!" << endl << endl;
-	
+
 	HANDLE h = GetStdHandle ( STD_OUTPUT_HANDLE );
 	string output;
 	while(true)
@@ -157,7 +155,7 @@ void show_chat2(SocketBase * s)
 			SetConsoleTextAttribute ( h, FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);
 			cout << username << ": " << output << endl;
 		}
-		
+
 	}
 	//exit(1);
 }
@@ -168,7 +166,7 @@ bool prompt_user()
 {
 	string input;
 	cout << "Hosting or joining other host?" << endl;
-	
+
 
 	while(true)
 	{
@@ -215,7 +213,7 @@ int main(int argc, char* argv[])
 		string username(argv[1]);
 
 		SocketBase * display_window2 = NULL;
-		
+
 		if(argc == 2) // Host setup
 		{
 			cout << "HOST SETUP" << endl;
@@ -242,10 +240,10 @@ int main(int argc, char* argv[])
 
 			display_window2 = cli_soc;
 		}
-		
+
 		// sends username for socket setup, print in log
 		display_window2->send(username);
-		
+
 
 
 		///*
@@ -257,7 +255,7 @@ int main(int argc, char* argv[])
 
 		//*/
 
-		
+
 		// closes socket and pipe connections
 		display_window.close();
 		display_window2->close();
@@ -318,7 +316,7 @@ int main(int argc, char* argv[])
 
 	// changes text title of console
 	SetConsoleTitle(TEXT("CHAT ---------------------------------"));
-	
+
 	//main_soc.send("hamburger time");
 	//return 1;
 	// ask user for message input
@@ -341,7 +339,7 @@ int main(int argc, char* argv[])
 		if(input == "quit")
 			break;
 	}
-	
+
 	// close pipe connection
 	chat_window.close();
 
