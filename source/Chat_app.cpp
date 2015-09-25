@@ -1,7 +1,6 @@
 // all main include headers
 #include "stdafx.h"
 
-
 #include <thread>
 
 // win namedpipe api classes
