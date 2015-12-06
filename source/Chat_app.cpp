@@ -1,16 +1,10 @@
-// all main include headers
+
 #include "stdafx.h"
-
 #include <thread>
-
-// win namedpipe api classes
 #include "PipeHost.h"
 #include "PipeClient.h"
-
-// winsocks classes
 #include "HostSoc.h"
 #include "ClientSoc.h"
-
 
 using std::cin;
 using std::string;
@@ -30,34 +24,25 @@ void GetDesktopResolution(int& horizontal, int& vertical)
 	vertical = desktop.bottom;
 }
 
-
 // changes text color in console
 // if argument is set to blue the text is light blue
 // else its yellow
 void change_color(string color = "")
 {
-
-
 	// COLOR CHANGER
 	HANDLE h = GetStdHandle ( STD_OUTPUT_HANDLE );
 	WORD wOldColorAttrs;
 	CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
 
-	/*
-	* First save the current color information
-	*/
-
+	// First save the current color information
 	GetConsoleScreenBufferInfo(h, &csbiInfo);
 	wOldColorAttrs = csbiInfo.wAttributes;
 
-	/*
-	* Set the new color information
-	*/
+	// Set the new color information
 	if(color == "blue")
 		SetConsoleTextAttribute ( h, FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_BLUE);
 	else // yellow
 		SetConsoleTextAttribute ( h, FOREGROUND_INTENSITY | FOREGROUND_RED | FOREGROUND_GREEN );
-	// END OF COLOR CHANGER
 }
 
 // WORKS!!!!!
@@ -88,8 +73,7 @@ void startup(LPCTSTR lpApplicationName, string username, bool if_host, string ip
 	}
 	std::wstring x;
 	x.assign(holder.begin(), holder.end());
-
-
+	
 	if(!CreateProcess(lpApplicationName, LPWSTR(x.c_str()), NULL, NULL,
 		NULL, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi))
 	{
@@ -104,7 +88,6 @@ void startup(LPCTSTR lpApplicationName, string username, bool if_host, string ip
 // pipe chatlog
 void show_chat1(Pipe * p, string username, SocketBase * s)
 {
-
 	// send username;
 	//s->send(username);
 
@@ -201,6 +184,7 @@ int main(int argc, char* argv[])
 		PipeClient display_window;
 
 		/*
+		// OLD not functional for now
 		// creates client end of socket
 		ClientSoc display_window2;
 
@@ -242,9 +226,6 @@ int main(int argc, char* argv[])
 
 		// sends username for socket setup, print in log
 		display_window2->send(username);
-
-
-
 		///*
 		// 2 threads for logging the chat coming from the pipe and from the socket
 		std::thread pipe_chatlog(show_chat1, &display_window, username, display_window2);
@@ -253,8 +234,6 @@ int main(int argc, char* argv[])
 		soc_chatlog.join();
 
 		//*/
-
-
 		// closes socket and pipe connections
 		display_window.close();
 		display_window2->close();
@@ -274,22 +253,16 @@ int main(int argc, char* argv[])
 	bool if_host = prompt_user();
 	if(!if_host)
 	{
-
-
 		cout << "Enter host ip address and port" << endl;
 		cout << "IP address: ";
 		cin >> ip_port[0];
 		cout << "Port number: ";
 		cin >> ip_port[1];
 	}
-
-
-
 	// get username input
 	string username;
 	cout << "Enter username" << endl;
 	cin >> username;
-
 
 	// get current directory
 	char buffer[256];
@@ -309,10 +282,7 @@ int main(int argc, char* argv[])
 	cout << "Connecting pipe ... " << endl;
 	chat_window.connect_pipe();
 	cout << "Connected!!! ... " << endl;
-
-
-
-
+	
 	// changes text title of console
 	SetConsoleTitle(TEXT("CHAT ---------------------------------"));
 
@@ -341,12 +311,5 @@ int main(int argc, char* argv[])
 
 	// close pipe connection
 	chat_window.close();
-
-
-
-	std::cout << "END OF APP" << std::endl;
-
-	char b;
-	cin >> b;
 	return 0;
 }
